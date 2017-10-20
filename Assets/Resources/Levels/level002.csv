@@ -1,0 +1,8 @@
+//Time,Type,Style,Delay,Count,Base Energy,Base Score,BaseFunds,GenerationType,Path Name,Path Offset X,Path Offset Y,Path Offset Z,Path Variant,Path Ease,PathTime,PathDelay
+0,Enemy,UnityShip,0.5,5,100,10,1,None,d,0,0,0,Horizontal,Linear,10,0
+5,Background,Crate,0.5,1,50,5,1,None,T2B,-5,0,0,None,Linear,20,0
+10,Background,Crate,0.5,1,50,5,1,None,T2B,3,0,0,None,Linear,20,0
+15,Background,Lighthouse,0.5,1,200,15,1,None,T2B,2,0,0,None,Linear,20,0
+20,Enemy,Hellicopter,0.5,3,500,40,3,None,TR2BL,0,0,0,None,Linear,10,0
+25,Boss,Boat,0.5,1,500,50,3,None,ZZ,0,0,0,None,Linear,200,0
+30,Extractable,MiningPost,0.5,1,100,10,1,None,T2B,0,0,0,None,Linear,10,0
