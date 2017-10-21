@@ -9,6 +9,7 @@ namespace Pamux
   {
     public abstract class GameControllerBase : MonoBehaviour
     {
+      public const string RESOLUTION_4K = "???2048x1536"; // 512(4x3)
       public const string RESOLUTION_RETINA = "2048x1536"; // 512(4x3)
       public const string RESOLUTION_1080p = "1920x1080"; //120(16x9)
       public static GameControllerBase INSTANCE = null;

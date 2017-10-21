@@ -39,6 +39,7 @@ namespace Pamux
         internal UIPanel pnlSummary;
         internal ToolBar toolBar;
         internal UIPanel pnlToolbar;
+        internal UIPanel pnlDebugConsole;
         private UILabel[] newScoreLabels; //TODO:Optimize
         internal Transform newScoreLabelPool;
         public float scoreFlightDuration = 1.0f;
@@ -56,9 +57,10 @@ namespace Pamux
               || SetMember(go, "gaugeCombo", ref gaugeCombo)
               || SetMember(go, "gaugeWeaponLevel", ref gaugeWeaponLevel)              
               || SetMember(go, "lblStatus", ref lblStatus)
-               || SetMember(go, "lblShield", ref lblShield)
+              || SetMember(go, "lblShield", ref lblShield)
               || SetMember(go, "btnPauseResume", ref btnPauseResume)
               || SetMember(go, "pnlToolBar", ref pnlToolbar)
+              || SetMember(go, "pnlDebugConsole", ref pnlDebugConsole)
               || SetMember(go, "newScoreLabelPool", ref newScoreLabelPool)
               || SetMember(go, "pnlHUD", ref pnlHUD)
               || SetMember(go, "pnlSummary", ref pnlSummary)
@@ -74,8 +76,6 @@ namespace Pamux
               || SetMember(go, "clblFireRateUpgradesValue", ref clblFireRateUpgradesValue)
               || SetMember(go, "lblBonusValue", ref lblBonusValue)
               || SetMember(go, "lblFinalScoreValue", ref lblFinalScoreValue);
-
-
         }
 
 
@@ -91,15 +91,42 @@ namespace Pamux
           {
             newScoreLabels[i] = newScoreLabelPool.GetChild(i).GetComponent<UILabel>();
           }
-
+          
+          if (!Debug.isDebugBuild)
+          {
+              pnlDebugConsole.gameObject.GetComponent<UIPanel>().enabled = false;
+          }
         }
 
         void Update()
         {
           if (Player.IsAlive())
           {
-            gaugeCombo.label.text = GameController.INSTANCE.ComboLevelName;
-            gaugeWeaponLevel.label.text = "" + Player.INSTANCE.FireRateIndex;
+            UpdateWhenPlayerAlive();
+          }
+          
+          if (Debug.isDebugBuild)
+          {
+            clblEnemiesKilledValue.text = "" + GameController.INSTANCE.summaryData.EnemiesInfo;
+            clblFundsCollectedValue.text = "" + GameController.INSTANCE.summaryData.FundsInfo;
+            clblMinesExploitedValue.text = "" + GameController.INSTANCE.summaryData.ExtractablesInfo;
+            clblFireRateUpgradesValue.text = "" + GameController.INSTANCE.summaryData.FireRateUpgradeInfo;
+
+            clblLevelTimeValue.text = "" + GameController.INSTANCE.mainGamePlay.LevelTime;
+            clblUniversalTimeValue.text = "" + GameController.INSTANCE.mainGamePlay.UniversalTime;
+          }
+        }
+        
+        void UpdateWhenPlayerAlive()
+        {
+            if (gaugeCombo.label != null)
+            {
+              gaugeCombo.label.text = GameController.INSTANCE.ComboLevelName;
+            }
+            if (gaugeWeaponLevel.label != null)
+            {
+              gaugeWeaponLevel.label.text = "" + Player.INSTANCE.FireRateIndex;
+            }
             lblEnergy.text = ((int)(Player.LID.energy.amount * 100 / Player.LID.energy.maxAmount)) + "%";
 
             if (score < GameController.INSTANCE.summaryData.score)
@@ -112,17 +139,6 @@ namespace Pamux
             }
 
             lblTime.text = ((int)(Time.time - GameController.INSTANCE.mainGamePlay._doRunStarted)).ToString("D3");
-          }
-          if (Debug.isDebugBuild)
-          {
-            clblEnemiesKilledValue.text = "" + GameController.INSTANCE.summaryData.EnemiesInfo;
-            clblFundsCollectedValue.text = "" + GameController.INSTANCE.summaryData.FundsInfo;
-            clblMinesExploitedValue.text = "" + GameController.INSTANCE.summaryData.ExtractablesInfo;
-            clblFireRateUpgradesValue.text = "" + GameController.INSTANCE.summaryData.FireRateUpgradeInfo;
-
-            clblLevelTimeValue.text = "" + GameController.INSTANCE.mainGamePlay.LevelTime;
-            clblUniversalTimeValue.text = "" + GameController.INSTANCE.mainGamePlay.UniversalTime;
-          }
         }
 
 

@@ -8,7 +8,6 @@ namespace Pamux
   {
       public static GameArea2D INSTANCE = new GameArea2D(-7.5f, 10.0f, 7.5f, -10.0f);
   
-  
       private static List<Vector3> L2R = new List<Vector3>
       {
           new Vector3(INSTANCE.left-4.5f, 0.0f, 0.0f),
