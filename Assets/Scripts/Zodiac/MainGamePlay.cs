@@ -132,12 +132,12 @@ namespace Pamux
         levelItems.Add(li);
       }
 
-      //internal bool Generate(int groupId, int id)
+      //internal bool Generate(int groupId, int Id)
       //{
       //    int start = 0;
-      //    for (int i = 0; i < id-1; ++i )
+      //    for (int i = 0; i < Id-1; ++i )
       //        start += levelLengths[i];
-      //    int end = start + levelLengths[id-1];
+      //    int end = start + levelLengths[Id-1];
       //    return Generate(groupId, start, end);
       //}
 

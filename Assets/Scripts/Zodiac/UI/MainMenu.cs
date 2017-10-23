@@ -111,7 +111,7 @@ namespace Pamux
           //    go.transform.localScale = Vector3.one;
 
           //    LevelSelectItem lsi = go.GetComponent<LevelSelectItem>();
-          //    lsi.id = i+1;
+          //    lsi.Id = i+1;
 
           //    UILabel label = go.GetComponentInChildren<UILabel>();
           //    label.text = String.Format("{0:00}-{1}", i+1, s_Galaxies[i]);

@@ -1,27 +1,32 @@
-using UnityEngine;
-using System.Collections;
+// ------------------------------------------------------------------------------------------------
+// <copyright file="Platform.cs" company="Pamux Studios">
+//     Copyright (c) Pamux Studios.  All rights reserved.
+// </copyright>
+// ------------------------------------------------------------------------------------------------
 
-namespace Pamux
+namespace Pamux.Abstracts
 {
-  namespace Abstracts
-  {
-    public class Platform : MonoBehaviour
-    {
-      private class NoOpPushNotifications : Interfaces.IPushNotifications
-      {
-        public void Register() {}
-        public void Unregister() {}
-      }
-      protected Interfaces.IPushNotifications pushNotifications = new NoOpPushNotifications();
-      
-      public Interfaces.IPushNotifications PushNotifications
-      {
-        get 
-        {
-          return pushNotifications;
-        }
-      }
+    using Pamux.Interfaces;
 
+    public class Platform
+    {
+        private class NoOpPushNotifications : IPushNotifications
+        {
+            public void Register()
+            {
+            }
+
+            public void Unregister()
+            {
+            }
+        }
+
+        private IPushNotifications pushNotifications = new NoOpPushNotifications();
+
+        public IPushNotifications PushNotifications
+        {
+            get { return pushNotifications; }
+            protected set { pushNotifications = value; }
+        }
     }
-  }
 }

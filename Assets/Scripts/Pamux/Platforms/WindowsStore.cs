@@ -1,31 +1,40 @@
-using UnityEngine;
-using System.Collections;
+// ------------------------------------------------------------------------------------------------
+// <copyright file="WindowsStore.cs" company="Pamux Studios">
+//     Copyright (c) Pamux Studios.  All rights reserved.
+// </copyright>
+// ------------------------------------------------------------------------------------------------
 
-using  Microsoft.Services.Store.Engagement;
-
-namespace Pamux
+namespace Pamux.Platforms
 {
-  namespace Platforms
-  {
-    public class WindowsStore : Abstracts.Platform
+    using Microsoft.Services.Store.Engagement.Unity3D;
+
+    using Pamux.Abstracts;
+    using Pamux.Interfaces;
+
+    public class WindowsStore : Platform
     {
-      public class PushNotifications : Interfaces.IPushNotifications
-      {
-        public void Register()
+        public class WindowsStorePushNotifications : IPushNotifications
         {
-          StoreServicesEngagementManager.RegisterNotificationChannel();
+            public void Register()
+            {
+                StoreServicesEngagementManager.RegisterNotificationChannelAsync((result) =>
+                {
+
+                });
+            }
+
+            public void Unregister()
+            {
+                StoreServicesEngagementManager.UnregisterNotificationChannelAsync((result) =>
+                {
+
+                });
+            }
         }
-        
-        public void Unregister()
+
+        public WindowsStore()
         {
-          
+            PushNotifications = new WindowsStorePushNotifications();
         }
-      }
-      
-      public WindowsStore()
-      {
-        pushNotifications = new PushNotifications();
-      }
     }
-  }
 }

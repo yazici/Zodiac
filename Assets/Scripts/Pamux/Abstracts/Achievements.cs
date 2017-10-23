@@ -1,115 +1,109 @@
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+// ------------------------------------------------------------------------------------------------
+// <copyright file="Achievements.cs" company="Pamux Studios">
+//     Copyright (c) Pamux Studios.  All rights reserved.
+// </copyright>
+// ------------------------------------------------------------------------------------------------
 
-namespace Pamux
+namespace Pamux.Abstracts
 {
-  namespace Abstracts
-  {
+    using System.Collections.Generic;
 
-    public class Achievement
-    {
-      string id;
-      string description;
-
-      public Achievement(Dictionary<string, int> headerNameToColMap, string[] fields)
-      {
-        id = fields[0];
-        description = fields[1];
-
-        Achievements.allAchievements[id] = this;
-      }
-    }
+    using UnityEngine;
 
     public class Achievements : ITextAssetHandler
     {
-      public static Dictionary<string, Achievement> allAchievements = new Dictionary<string, Achievement>();
-      private HashSet<string> completedAchievements = new HashSet<string>();
+        public static readonly IDictionary<string, Achievement> AllAchievements = new Dictionary<string, Achievement>();
 
+        private readonly HashSet<string> completedAchievements = new HashSet<string>();
 
-      public Achievements()
-      {
-        TextAssetHelper.Load("achievements", this);
-
-        if (!PlayerPrefs.HasKey("Player.Achievements"))
+        public Achievements()
         {
-          return;
-        }
-        foreach (string str in PlayerPrefs.GetString("Player.Achievements").Split(','))
-        {
-          completedAchievements.Add(str);
-        }
-      }
+            TextAssetHelper.Load("achievements", this);
 
-      #region ITextAssetHandler
+            if (!PlayerPrefs.HasKey("Player.Achievements"))
+            {
+                return;
+            }
 
-      public void AddItems(Dictionary<string, int> headerNameToColMap, string[] fields)
-      {
-        new Achievement(headerNameToColMap, fields);
-      }
-
-      public void SetVariable(string name, string value)
-      {
-
-      }
-      public void OnItemsReady()
-      {
-
-      }
-      #endregion
-
-      public bool IsAchievementCompleted(string achievementId)
-      {
-        return completedAchievements.Contains(achievementId);
-      }
-      public void SetAchievementCompleted(string achievementId)
-      {
-        if (achievementId.Length == 0 || completedAchievements.Contains(achievementId))
-        {
-          return;
+            foreach (string str in PlayerPrefs.GetString("Player.Achievements").Split(','))
+            {
+                completedAchievements.Add(str);
+            }
         }
 
-        completedAchievements.Add(achievementId);
+        #region ITextAssetHandler
 
-        string completedStr = "";
-        foreach (string str in completedAchievements)
+        public void AddItems(Dictionary<string, int> headerNameToColMap, string[] fields)
         {
-          completedStr += str + ",";
+            new Achievement(headerNameToColMap, fields);
         }
-        PlayerPrefs.SetString("Player.Achievements", completedStr);
-      }
 
-      public bool IsLevelObjectiveCompleted(int objectiveId, int levelId, Difficulties difficulty)
-      {
-        return IsAchievementCompleted(GetAchievementKey(objectiveId, levelId, difficulty));
-      }
-
-      public void SetLevelObjectiveComplete(int objectiveId, int levelId, Difficulties difficulty)
-      {
-        SetAchievementCompleted(GetAchievementKey(objectiveId, levelId, difficulty));
-      }
-
-      public bool IsLevelUnlocked(int levelId, Difficulties difficulty)
-      {
-        if (difficulty == Difficulties.Easy)
+        public void SetVariable(string name, string value)
         {
-          return levelId == 0 || IsLevelCompleted(levelId - 1, difficulty);
         }
-        return IsLevelCompleted(levelId, difficulty - 1);
-      }
-      public bool IsLevelCompleted(int levelId, Difficulties difficulty)
-      {
-        return IsAchievementCompleted(GetAchievementKey(0, levelId, difficulty));
-      }
-      public void MarkLevelComplete(int levelId, Difficulties difficulty)
-      {
-        SetAchievementCompleted(GetAchievementKey(0, levelId, difficulty));
-      }
 
-      private string GetAchievementKey(int levelId, int objectiveId, Difficulties difficulty)
-      {
-        return string.Format("O{0}L{1}D{2}", objectiveId, levelId, (int)difficulty);
-      }
+        public void OnItemsReady()
+        {
+        }
+
+        #endregion
+
+        public bool IsAchievementCompleted(string achievementId)
+        {
+            return completedAchievements.Contains(achievementId);
+        }
+
+        public void SetAchievementCompleted(string achievementId)
+        {
+            if (achievementId.Length == 0 || completedAchievements.Contains(achievementId))
+            {
+                return;
+            }
+
+            completedAchievements.Add(achievementId);
+
+            string completedStr = string.Empty;
+            foreach (string str in completedAchievements)
+            {
+                completedStr += str + ",";
+            }
+
+            PlayerPrefs.SetString("Player.Achievements", completedStr);
+        }
+
+        public bool IsLevelObjectiveCompleted(int objectiveId, int levelId, Difficulties difficulty)
+        {
+            return IsAchievementCompleted(GetAchievementKey(objectiveId, levelId, difficulty));
+        }
+
+        public void SetLevelObjectiveComplete(int objectiveId, int levelId, Difficulties difficulty)
+        {
+            SetAchievementCompleted(GetAchievementKey(objectiveId, levelId, difficulty));
+        }
+
+        public bool IsLevelUnlocked(int levelId, Difficulties difficulty)
+        {
+            if (difficulty == Difficulties.Easy)
+            {
+                return levelId == 0 || IsLevelCompleted(levelId - 1, difficulty);
+            }
+
+            return IsLevelCompleted(levelId, difficulty - 1);
+        }
+
+        public bool IsLevelCompleted(int levelId, Difficulties difficulty)
+        {
+            return IsAchievementCompleted(GetAchievementKey(0, levelId, difficulty));
+        }
+
+        public void MarkLevelComplete(int levelId, Difficulties difficulty)
+        {
+            SetAchievementCompleted(GetAchievementKey(0, levelId, difficulty));
+        }
+
+        private string GetAchievementKey(int levelId, int objectiveId, Difficulties difficulty)
+        {
+            return string.Format("O{0}L{1}D{2}", objectiveId, levelId, (int)difficulty);
+        }
     }
-  }
 }

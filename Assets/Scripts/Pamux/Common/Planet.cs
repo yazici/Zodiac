@@ -13,7 +13,7 @@ namespace Pamux
           Styleable stylable = this.gameObject.GetComponent<Styleable>();
   
           string id = Random.Range(1, stylable.stylesRoot.childCount).ToString("D2");
-          //Debug.Log(id);
+          //Debug.Log(Id);
           stylable.SetStyle("Planet_" + id);
           styleInfo = stylable.styleInfo as PlanetStyleInfo;
           if (styleInfo == null)

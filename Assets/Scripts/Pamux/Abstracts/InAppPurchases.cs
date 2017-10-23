@@ -1,36 +1,31 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Pamux
+namespace Pamux.Abstracts
 {
-  namespace Abstracts
+  public abstract class AsyncAction
   {
-    public abstract class AsyncAction
-    {
-      public void Begin() { }
-      public void Cancel() { }
+    public void Begin() { }
+    public void Cancel() { }
 
-      protected virtual void DoBegin() { }
-      protected virtual void DoCancel() { }
+    protected virtual void DoBegin() { }
+    protected virtual void DoCancel() { }
 
-      protected virtual void OnProgress() { }
-      protected virtual void OnSuccess() { }
-      protected virtual void OnFailure() { }
-      protected virtual void OnCancel() { }
+    protected virtual void OnProgress() { }
+    protected virtual void OnSuccess() { }
+    protected virtual void OnFailure() { }
+    protected virtual void OnCancel() { }
 
-      private int id;
-    }
+    private int id;
+  }
 
+  public abstract class InAppPurchases : MonoBehaviour
+  {
 
+    protected abstract bool IsBillingSupported();
+    protected abstract string GetStoreName();
 
-    public abstract class InAppPurchases : MonoBehaviour
-    {
-
-      protected abstract bool IsBillingSupported();
-      protected abstract string GetStoreName();
-
-      protected abstract bool CanMakePayments();
-      protected abstract bool IsPurchased();
-    }
+    protected abstract bool CanMakePayments();
+    protected abstract bool IsPurchased();
   }
 }
