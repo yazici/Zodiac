@@ -1,14 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Pamux
+namespace Pamux.Interfaces
 {
-  namespace Interfaces
+  public interface IPushNotifications
   {
-    public interface IPushNotifications
-    {
-      void Register();
-      void Unregister();
-    }
+    void Register();
+    void Unregister();
   }
 }
