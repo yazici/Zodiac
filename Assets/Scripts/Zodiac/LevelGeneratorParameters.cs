@@ -86,9 +86,9 @@ namespace Pamux
       class FieldParser
       {
         private string[] fields;
-        Dictionary<string, int> headerNameToColMap;
+        IDictionary<string, int> headerNameToColMap;
 
-        internal FieldParser(Dictionary<string, int> headerNameToColMap, string[] fields)
+        internal FieldParser(IDictionary<string, int> headerNameToColMap, string[] fields)
         {
           this.headerNameToColMap = headerNameToColMap;
           this.fields = fields;
@@ -124,7 +124,7 @@ namespace Pamux
       }
 
 
-      public LevelGeneratorParameters(Dictionary<string, int> headerNameToColMap, string[] fields)
+      public LevelGeneratorParameters(IDictionary<string, int> headerNameToColMap, string[] fields)
       {
         var fp = new FieldParser(headerNameToColMap, fields);
 

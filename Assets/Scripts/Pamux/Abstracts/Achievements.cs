@@ -6,6 +6,7 @@
 
 namespace Pamux.Abstracts
 {
+    using Pamux.Interfaces;
     using System.Collections.Generic;
 
     using UnityEngine;
@@ -33,7 +34,7 @@ namespace Pamux.Abstracts
 
         #region ITextAssetHandler
 
-        public void AddItems(Dictionary<string, int> headerNameToColMap, string[] fields)
+        public void AddItems(IDictionary<string, int> headerNameToColMap, string[] fields)
         {
             new Achievement(headerNameToColMap, fields);
         }
