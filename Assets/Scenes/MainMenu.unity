@@ -1630,6 +1630,10 @@ Prefab:
       propertyPath: onClick.Array.data[0].mMethodName
       value: OnClickPlay
       objectReference: {fileID: 0}
+    - target: {fileID: 11400032, guid: 0cfccc7f3006f1e489cf860b70a0259e, type: 2}
+      propertyPath: explosionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ee4ea4959db77ea4cb8b0c7590eca381, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0cfccc7f3006f1e489cf860b70a0259e, type: 2}
   m_IsPrefabParent: 0

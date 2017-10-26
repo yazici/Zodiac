@@ -3,22 +3,16 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-namespace Pamux
+namespace Pamux.Zodiac.UI
 {
-  namespace Zodiac
-  {
-    namespace UI
+    public sealed class Credits : Abstracts.UI
     {
-      public sealed class Credits : Abstracts.UI
-      {
 
         public static Credits INSTANCE = null;
 
         void Awake()
         {
-          INSTANCE = this;
+            INSTANCE = this;
         }
-      }
     }
-  }
 }
