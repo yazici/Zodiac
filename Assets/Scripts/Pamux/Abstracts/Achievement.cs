@@ -10,9 +10,9 @@ namespace Pamux.Abstracts
 
     public class Achievement
     {
-        public string Id { get; }
+        public string Id { get; private set; }
 
-        public string Description { get; }
+        public string Description { get; private set; }
 
         public Achievement(IDictionary<string, int> headerNameToColMap, string[] fields)
         {

@@ -4,9 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 
-namespace Pamux
-{
-  namespace Zodiac
+namespace Pamux.Zodiac
   {
     public class DifficultyParameters
     {
@@ -54,4 +52,3 @@ namespace Pamux
       }
     }
   }
-}
