@@ -6,7 +6,8 @@
 
 namespace Pamux.Platforms
 {
-    using Microsoft.Services.Store.Engagement.Unity3D;
+
+    //using Microsoft.Services.Store.Engagement.Unity3D;
 
     using Pamux.Abstracts;
     using Pamux.Interfaces;
@@ -17,18 +18,18 @@ namespace Pamux.Platforms
         {
             public void Register()
             {
-                StoreServicesEngagementManager.RegisterNotificationChannelAsync((result) =>
-                {
+                //StoreServicesEngagementManager.RegisterNotificationChannelAsync((result) =>
+                //{
 
-                });
+                //});
             }
 
             public void Unregister()
             {
-                StoreServicesEngagementManager.UnregisterNotificationChannelAsync((result) =>
-                {
+                //StoreServicesEngagementManager.UnregisterNotificationChannelAsync((result) =>
+                //{
 
-                });
+                //});
             }
         }
 

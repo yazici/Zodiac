@@ -5,7 +5,7 @@ using System.Collections;
 
 public class DrawHitTriangle : MonoBehaviour
 {
-  public Camera camera;
+  public new Camera camera;
 
   void Update()
   {
